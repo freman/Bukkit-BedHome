@@ -19,6 +19,7 @@
 package au.net.fremnet.bukkit.BedHome;
 
 import org.bukkit.Location;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerBedLeaveEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -41,7 +42,8 @@ public class BedHomePL extends PlayerListener {
 	
 	public void onPlayerBedLeave(PlayerBedLeaveEvent event) {
 		Player player = event.getPlayer();
-		plugin.location.saveLocation(player);
-		player.setCompassTarget(player.getLocation());
+		Block bed = event.getBed();
+		plugin.location.saveLocation(player, bed.getLocation());
+		player.setCompassTarget(bed.getLocation());
 	}
 }
