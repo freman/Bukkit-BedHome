@@ -43,7 +43,7 @@ public class BedHomePL extends PlayerListener {
 	public void onPlayerBedLeave(PlayerBedLeaveEvent event) {
 		Player player = event.getPlayer();
 		Block bed = event.getBed();
-		plugin.location.saveLocation(player, bed.getLocation());
+		plugin.location.saveLocation(player, player.getLocation());
 		player.setCompassTarget(bed.getLocation());
 	}
 }

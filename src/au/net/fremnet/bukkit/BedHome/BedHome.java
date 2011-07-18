@@ -14,7 +14,7 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 package au.net.fremnet.bukkit.BedHome;
 
@@ -28,8 +28,8 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class BedHome extends JavaPlugin {
-	private final BedHomePL playerListener = new BedHomePL(this);
-	public final BedHomeLocation location = new BedHomeLocation(this);
+	private final BedHomePL			playerListener	= new BedHomePL(this);
+	public final BedHomeLocation	location		= new BedHomeLocation(this);
 
 	@Override
 	public void onDisable() {
@@ -42,29 +42,29 @@ public class BedHome extends JavaPlugin {
 		PluginDescriptionFile pdfFile = this.getDescription();
 		PluginManager pm = getServer().getPluginManager();
 		location.Init();
-		
+
 		pm.registerEvent(Event.Type.PLAYER_JOIN, playerListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.PLAYER_BED_LEAVE, playerListener, Event.Priority.Normal, this);
 
-		System.out.println(pdfFile.getName() + " version " + pdfFile.getVersion() + " - Copyright 2011 - Shannon Wynter (http://fremnet.net) is enabled :)");
-
+		System.out.println(pdfFile.getName() + " version " + pdfFile.getVersion()
+			+ " - Copyright 2011 - Shannon Wynter (http://fremnet.net) is enabled :)");
 	}
 
-    @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-    	if (commandLabel.equalsIgnoreCase("home")) {
-    		if (sender instanceof Player) {
-    			Player player = (Player) sender;
-    			Location loc = location.loadLocation(player);
-    			if (loc == null) {
-    				sender.sendMessage("You have no home yet, go sleep in a bed");
-    			}
-    			else {
-    				player.teleport(loc);
-    			}
-    		}
-    		return true;
-    	}
-		return false;   	
-    }
+	@Override
+	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
+		if (cmd.getName().equalsIgnoreCase("home")) {
+			if (sender instanceof Player) {
+				Player player = (Player) sender;
+				Location loc = location.loadLocation(player);
+				if (loc == null) {
+					sender.sendMessage("You have no home yet, go sleep in a bed");
+				}
+				else {
+					player.teleport(loc);
+				}
+				return true;
+			}
+		}
+		return false;
+	}
 }
