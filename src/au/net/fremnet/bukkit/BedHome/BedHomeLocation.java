@@ -27,6 +27,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.Locale;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -64,7 +65,7 @@ public class BedHomeLocation {
 		BufferedWriter bw;
 		try {
 			bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(save)));
-			bw.write(String.format("%f,%f,%f", location.getX(), location.getY(), location.getZ()));
+			bw.write(String.format(Locale.US, "%f:%f:%f", location.getX(), location.getY(), location.getZ()));
 			bw.close();
 		}
 		catch (FileNotFoundException e) {
@@ -90,7 +91,7 @@ public class BedHomeLocation {
 				return null;
 			}
 			
-			String splits[] = inputLine.split(",", 3);
+			String splits[] = inputLine.split(":", 3);
 			return new Location(player.getWorld(), Double.parseDouble(splits[0]), Double.parseDouble(splits[1]), Double.parseDouble(splits[2]));
 		}
 		catch (IOException e) {

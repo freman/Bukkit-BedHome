@@ -18,6 +18,9 @@
 
 package au.net.fremnet.bukkit.BedHome;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -28,6 +31,9 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class BedHome extends JavaPlugin {
+	protected final static Logger	logger			= Logger.getLogger("Minecraft");
+	public static final String		name			= "BedHome";
+
 	private final BedHomePL			playerListener	= new BedHomePL(this);
 	public final BedHomeLocation	location		= new BedHomeLocation(this);
 
@@ -46,8 +52,7 @@ public class BedHome extends JavaPlugin {
 		pm.registerEvent(Event.Type.PLAYER_JOIN, playerListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.PLAYER_BED_LEAVE, playerListener, Event.Priority.Normal, this);
 
-		System.out.println(pdfFile.getName() + " version " + pdfFile.getVersion()
-			+ " - Copyright 2011 - Shannon Wynter (http://fremnet.net) is enabled :)");
+		log("Version " + pdfFile.getVersion() + " - Copyright 2011 - Shannon Wynter (http://fremnet.net) is enabled");
 	}
 
 	@Override
@@ -66,5 +71,9 @@ public class BedHome extends JavaPlugin {
 			}
 		}
 		return false;
+	}
+
+	public static void log(String txt) {
+		logger.log(Level.INFO, String.format("[%s] %s", name, txt));
 	}
 }

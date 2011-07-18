@@ -1,7 +1,7 @@
 name: BedHome
 main: au.net.fremnet.bukkit.BedHome.BedHome
 website: http://fremnet.net/
-version: 0.2
+version: 0.3
 commands:
     home:
         description: Will teleport you to your home (being the last bed you slept in)
