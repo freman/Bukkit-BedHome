@@ -25,7 +25,6 @@ import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -49,8 +48,7 @@ public class BedHome extends JavaPlugin {
 		PluginManager pm = getServer().getPluginManager();
 		location.Init();
 
-		pm.registerEvent(Event.Type.PLAYER_JOIN, playerListener, Event.Priority.Normal, this);
-		pm.registerEvent(Event.Type.PLAYER_BED_LEAVE, playerListener, Event.Priority.Normal, this);
+		pm.registerEvents(playerListener, this);
 
 		log("Version " + pdfFile.getVersion() + " - Copyright 2011 - Shannon Wynter (http://fremnet.net) is enabled");
 	}

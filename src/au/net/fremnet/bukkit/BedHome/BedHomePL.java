@@ -21,17 +21,19 @@ package au.net.fremnet.bukkit.BedHome;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerBedLeaveEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerListener;
 
-public class BedHomePL extends PlayerListener {
+public class BedHomePL implements Listener {
 	static BedHome plugin;
 	
 	public BedHomePL(BedHome parent) {
 		plugin = parent;
 	}
 	
+	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
 		Location loc = plugin.location.loadLocation(player);
@@ -40,6 +42,7 @@ public class BedHomePL extends PlayerListener {
 		}
 	}
 	
+	@EventHandler
 	public void onPlayerBedLeave(PlayerBedLeaveEvent event) {
 		Player player = event.getPlayer();
 		Block bed = event.getBed();

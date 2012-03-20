@@ -20,19 +20,13 @@
 	</target>
 
 	<target name="dist" depends="compile">
-		<mkdir dir="${dist}" />
-		<jar jarfile="${dist}/${pluginname}.jar">
+		<jar jarfile="${plugins}/${pluginname}.jar">
 			<fileset dir="${bin}" />
 			<fileset file="${src}/plugin.yml"/>
 		</jar>
 	</target>
 
-	<target name="deploy" depends="dist">
-		<copy file="${dist}/${pluginname}.jar" todir="${plugins}" />
-	</target>
-
 	<target name="clean">
 		<delete dir="${bin}" />
-		<delete dir="${dist}" />
 	</target>
 </project>
